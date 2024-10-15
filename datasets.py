@@ -360,3 +360,39 @@ class CIFAR100(CIFAR10):
     test_list = [
         ['test', 'f0ef6b0ae62326f3e7ffdfab6717acfc'],
     ]
+
+
+class EmoticDataset(data.Dataset):
+    """Custom dataset class for the 'emotic' dataset.
+    
+    Args:
+        csv_file (string): Path to the CSV file with annotations.
+        root_dir (string): Directory with all the images.
+        transform (callable, optional): Optional transform to be applied on a sample.
+    """
+    def __init__(self, csv_file, root_dir, transform=None):
+        self.annotations = pd.read_csv(csv_file)
+        self.root_dir = root_dir
+        self.transform = transform
+
+    def __len__(self):
+        return len(self.annotations)
+
+    def __getitem__(self, idx):
+        if torch.is_tensor(idx):
+            idx = idx.tolist()
+        
+        # Read the image file path from the CSV and load the image
+        img_name = self.annotations.iloc[idx, 39]  # Assuming column 39 contains the image paths
+        img_path = os.path.join(self.root_dir, img_name)
+        image = np.load(img_path)  # Assuming images are saved as NumPy arrays
+        image = image.astype(np.uint8)  # Ensuring image is in uint8 format
+        
+        # Extract the labels (one-hot encoded, in columns 8 to 33)
+        labels = self.annotations.iloc[idx, 8:34].values.astype(float)  # 26 labels in total
+        
+        # Apply any transformations (e.g., resizing, normalization) if provided
+        if self.transform:
+            image = self.transform(image)
+        
+        return image, labels
