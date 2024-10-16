@@ -370,9 +370,9 @@ class EmoticDataset(data.Dataset):
         root_dir (string): Directory with all the images.
         transform (callable, optional): Optional transform to be applied on a sample.
     """
-    def __init__(self, csv_file, root_dir, transform=None):
-        self.annotations = pd.read_csv(csv_file)
-        self.root_dir = root_dir
+    def __init__(self, root , transform=None):
+        self.annotations = pd.read_csv('/kaggle/input/emotic/annots_arrs/annot_arrs_train.csv')
+        self.root_dir = root
         self.transform = transform
 
     def __len__(self):
