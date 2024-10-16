@@ -361,7 +361,7 @@ class CIFAR100(CIFAR10):
         ['test', 'f0ef6b0ae62326f3e7ffdfab6717acfc'],
     ]
 
-
+import pandas as pd
 class EmoticDataset(data.Dataset):
     """Custom dataset class for the 'emotic' dataset.
     
