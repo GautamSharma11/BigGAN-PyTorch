@@ -16,5 +16,5 @@ python train.py \
 --test_every 2000 --save_every 1000 --num_best_copies 5 --num_save_copies 2 --seed 0 \
 --use_multiepoch_sampler \
 --resume \
---load_weights /kaggle/input/prebiggan/138k \
+--weights_root /kaggle/input/prebiggan --experiment_name 138k \
 --which_best FID \
