@@ -374,7 +374,7 @@ class EmoticDataset(data.Dataset):
         self.annotations = pd.read_csv('/kaggle/input/emotic/annots_arrs/annot_arrs_train.csv')
         self.root_dir = root
         if root_dir.startswith('data/'):
-            root_dir = root_dir.replace('data/', '', 1)  # Remove only the first occurrence
+            root_dir = root_dir.replace('data/', '/', 1)  # Remove only the first occurrence
         self.transform = transform
 
     def __len__(self):
