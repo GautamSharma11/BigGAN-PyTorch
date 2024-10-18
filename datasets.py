@@ -391,7 +391,7 @@ class EmoticDataset(data.Dataset):
         image = image.astype(np.uint8)  # Ensuring image is in uint8 format
         
         # Extract the labels (one-hot encoded, in columns 8 to 33)
-        labels = self.annotations.iloc[idx, 8:34].values.astype(float)  # 26 labels in total
+        labels = self.annotations.iloc[idx, 8:34].values.astype(np.int64)  # 26 labels in total
         # Apply any transformations (e.g., resizing, normalization) if provided
         if self.transform:
             image = self.transform(image)
